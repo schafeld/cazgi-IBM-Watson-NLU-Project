@@ -11,7 +11,7 @@ class App extends React.Component {
   is set to text
   */
   state = {innercomp:<textarea rows="4" cols="50" id="textinput"/>,
-            mode: "text",
+          mode: "text",
           sentimentOutput:[],
           sentiment:true
         }
@@ -26,15 +26,16 @@ class App extends React.Component {
     let rows = 1
     let mode = "url"
     //If the input mode is text make it 4 lines
-    if(input_mode === "text"){
+    if (input_mode === "text") {
       mode = "text"
       rows = 4
     }
-      this.setState({innercomp:<textarea rows={rows} cols="50" id="textinput"/>,
-      mode: mode,
-      sentimentOutput:[],
-      sentiment:true
-      });
+
+    this.setState({innercomp:<textarea rows={rows} cols="50" id="textinput"/>,
+    mode: mode,
+    sentimentOutput:[],
+    sentiment:true
+    });
   } 
   
   sendForSentimentAnalysis = () => {
@@ -88,10 +89,10 @@ class App extends React.Component {
         <button className="btn-primary" onClick={this.sendForSentimentAnalysis}>Analyze Sentiment</button>
         <button className="btn-primary" onClick={this.sendForEmotionAnalysis}>Analyze Emotion</button>
         <br/>
-            {this.state.sentimentOutput}
+        {this.state.sentimentOutput}
       </div>
     );
-    }
+  }
 }
 
 export default App;
