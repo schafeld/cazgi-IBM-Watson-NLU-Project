@@ -33,31 +33,30 @@ function getNLUInstance() {
 }
 
 
-//The default endpoint for the webserver
+// The default endpoint for the webserver
 app.get("/",(req,res)=>{
     res.render('index.html');
   });
 
-//The endpoint for the webserver ending with /url/emotion
+// The endpoint for the webserver ending with /url/emotion
 app.get("/url/emotion", (req,res) => {
-    //Extract the url passed from the client through the request object
+    // Extract the url passed from the client through the request object
     let urlToAnalyze = req.query.url
     const analyzeParams = 
         {
             "url": urlToAnalyze,
             "features": {
                 "keywords": {
-                                "emotion": true,
-                                "limit": 1
-                            }
+                    "emotion": true,
+                    "limit": 1
+                }
             }
         }
      
      const naturalLanguageUnderstanding = getNLUInstance();
      
-     naturalLanguageUnderstanding.analyze(analyzeParams)
-     .then(analysisResults => {
-        //Retrieve the emotion and return it as a formatted string
+     naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
+        // Retrieve the emotion and return it as a formatted string
         return res.send(analysisResults.result.keywords[0].emotion,null,2);
      })
      .catch(err => {
@@ -65,7 +64,7 @@ app.get("/url/emotion", (req,res) => {
      });
 });
 
-//The endpoint for the webserver ending with /url/sentiment
+// The endpoint for the webserver ending with /url/sentiment
 app.get("/url/sentiment", (req,res) => {
     app.get("/url/sentiment", (req,res) => {
         let urlToAnalyze = req.query.url
@@ -82,10 +81,8 @@ app.get("/url/sentiment", (req,res) => {
 
         const naturalLanguageUnderstanding = getNLUInstance();
 
-        naturalLanguageUnderstanding.analyze(analyzeParams)
-        .then(analysisResults => {
-            //Retrieve the sentiment and return it as a formatted string
-
+        naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
+            // Retrieve the sentiment and return it as a formatted string
             return res.send(analysisResults.result.keywords[0].sentiment,null,2);
         })
         .catch(err => {
@@ -94,7 +91,7 @@ app.get("/url/sentiment", (req,res) => {
     });
 });
 
-//The endpoint for the webserver ending with /text/emotion
+// The endpoint for the webserver ending with /text/emotion
 app.get("/text/emotion", (req,res) => {
     app.get("/text/emotion", (req,res) => {
         let textToAnalyze = req.query.text
@@ -111,10 +108,8 @@ app.get("/text/emotion", (req,res) => {
 
         const naturalLanguageUnderstanding = getNLUInstance();
 
-        naturalLanguageUnderstanding.analyze(analyzeParams)
-        .then(analysisResults => {
-            //Retrieve the emotion and return it as a formatted string
-
+        naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
+            // Retrieve the emotion and return it as a formatted string
             return res.send(analysisResults.result.keywords[0].emotion,null,2);
         })
         .catch(err => {
@@ -139,10 +134,8 @@ app.get("/text/sentiment", (req,res) => {
 
         const naturalLanguageUnderstanding = getNLUInstance();
 
-        naturalLanguageUnderstanding.analyze(analyzeParams)
-        .then(analysisResults => {
-            //Retrieve the sentiment and return it as a formatted string
-
+        naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
+            // Retrieve the sentiment and return it as a formatted string
             return res.send(analysisResults.result.keywords[0].sentiment,null,2);
         })
         .catch(err => {
@@ -154,4 +147,3 @@ app.get("/text/sentiment", (req,res) => {
 let server = app.listen(8080, () => {
     console.log('Listening', server.address().port)
 })
-
